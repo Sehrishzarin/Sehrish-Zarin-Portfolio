@@ -1,0 +1,169 @@
+.experience-timeline-view {
+  animation: timelineFadeIn 300ms ease forwards;
+  margin-top: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@keyframes timelineFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Horizontal Scroll Container */
+.experience-timeline-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  user-select: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.experience-timeline-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.experience-timeline-scroll-container.dragging {
+  cursor: grabbing;
+}
+
+/* Timeline Canvas */
+.experience-timeline-canvas {
+  position: relative;
+  height: 280px;
+  box-sizing: border-box;
+}
+
+/* Vertical Year Grid Lines */
+.timeline-year-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 35px;
+  width: 1px;
+  background-color: rgba(163, 163, 156, 0.12);
+  z-index: 1;
+}
+
+/* Vertical "NOW" Marker Line */
+.timeline-now-line {
+  position: absolute;
+  top: 0;
+  bottom: 35px;
+  width: 0;
+  border-left: 1.5px dashed var(--accent, #8ba888);
+  z-index: 3;
+}
+
+.timeline-now-label {
+  position: absolute;
+  top: -18px;
+  left: -12px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent, #8ba888);
+  text-transform: lowercase;
+}
+
+/* Entry Bars Layer */
+.timeline-bars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 235px;
+  z-index: 2;
+}
+
+/* Individual Entry Bar */
+.timeline-entry-bar {
+  position: absolute;
+  height: 60px;
+  border: 1px solid rgba(163, 163, 156, 0.25);
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  box-sizing: border-box;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+/* Ongoing Role Bar Styling: Open right edge flush to now-line */
+.timeline-entry-bar.ongoing {
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(139, 168, 136, 0.12) 100%);
+  border-color: rgba(139, 168, 136, 0.35);
+}
+
+.timeline-entry-bar:hover {
+  border-color: var(--accent, #8ba888);
+  background-color: rgba(139, 168, 136, 0.08);
+}
+
+.timeline-entry-title {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary, #f5f5f0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline-entry-company {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.725rem;
+  font-weight: 400;
+  color: var(--text-muted, #a3a39c);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Year Axis along the Bottom */
+.timeline-year-axis {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  border-top: 1px solid rgba(163, 163, 156, 0.2);
+  z-index: 1;
+}
+
+.timeline-year-tick {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.timeline-year-label {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted, #a3a39c);
+  margin-top: 0.5rem;
+}
+
+/* Hint Text Centered Below Timeline */
+.experience-timeline-hint {
+  text-align: center;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--text-muted, #a3a39c);
+  margin-top: 1.75rem;
+  margin-bottom: 0;
+}

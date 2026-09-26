@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --bg-primary: #0a0a0a;
+  --text-primary: #f5f5f0;
+  --text-muted: #a3a39c;
+  --accent: #8ba888;
+  --bg-light: #f5f5f0;
+  --text-on-light: #0a0a0a;
+
+  /* Typography */
+  --font-headline: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --font-handwritten: "Caveat", cursive;
+
+  /* Spacing */
+  --section-padding-v: clamp(4rem, 10vh, 8rem);
+  --content-max-width: 1100px;
+  --content-padding-h: clamp(1.5rem, 5vw, 6rem);
+}
+
+/* Global Reset & Base Typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-shadow: none !important; /* Strictly no box-shadow glows */
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: visible; /* Ensure position: sticky is never broken */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  font-weight: 400;
+}
+
+/* Interactive Cursor Pointer & Micro-Animations */
+a,
+button,
+[role="button"],
+input[type="submit"],
+.panel-link,
+.panel-thumbnail-btn,
+.experience-toggle-btn,
+.nav-link,
+.contact-link {
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 200ms ease,
+              opacity 200ms ease,
+              background-color 200ms ease,
+              border-color 200ms ease;
+}
+
+a:hover,
+button:hover,
+[role="button"]:hover {
+  transform: translateY(-1px);
+}
+
+a:active,
+button:active,
+[role="button"]:active {
+  transform: translateY(0) scale(0.98);
+}
