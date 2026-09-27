@@ -215,6 +215,26 @@
   font-size: 0.9rem;
 }
 
+.hero-social-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted, #a3a39c);
+  text-decoration: none;
+  transition: color 200ms ease, transform 200ms ease;
+}
+
+.hero-social-link:hover {
+  color: var(--accent, #C8963E);
+  transform: translateY(-2px);
+}
+
 /* Hand-drawn Annotation Note */
 .hero-annotation {
   display: inline-flex;
