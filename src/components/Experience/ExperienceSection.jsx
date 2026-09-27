@@ -11,7 +11,11 @@ export default function ExperienceSection() {
       <div className="experience-container">
         {/* Header Row: Eyebrow + View Toggle */}
         <div className="experience-header-row">
-          <p className="experience-eyebrow">Experience</p>
+          <p className="experience-eyebrow timestamp-motif">
+            <span className="status-dot" aria-hidden="true" />
+            <span>Experience</span>
+            <span className="timestamp-mono">[ 2023–present ]</span>
+          </p>
 
           <div className="experience-header-controls">
             {/* Annotation note pointing right towards Timeline option */}
@@ -28,7 +32,7 @@ export default function ExperienceSection() {
               >
                 <path
                   d="M4 14C14 18 24 14 34 8M34 8L28 7M34 8L31 14"
-                  stroke="var(--accent, #8ba888)"
+                  stroke="var(--accent, #e07a5f)"
                   strokeWidth="1.75"
                   strokeLinecap="round"
                   strokeLinejoin="round"

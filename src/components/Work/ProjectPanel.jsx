@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './ProjectPanel.css'
 
 export default function ProjectPanel({
   index,
+  timestamp,
+  isFeatured = false,
   variant = 'dark',
   title,
   category,
@@ -16,6 +18,25 @@ export default function ProjectPanel({
   images
 }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const panelRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.15 }
+    )
+
+    if (panelRef.current) {
+      observer.observe(panelRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   // Determine if this panel is an even index (02, 04, 06) for mirrored layout
   const isEven = parseInt(index, 10) % 2 === 0
@@ -27,12 +48,19 @@ export default function ProjectPanel({
   const hasImages = allImages.length > 0
 
   return (
-    <div className="project-panel-wrapper">
+    <div
+      ref={panelRef}
+      className={`project-panel-wrapper ${isFeatured ? 'featured-wrapper' : ''} ${
+        isVisible ? 'panel-visible' : ''
+      }`}
+    >
       <div className={`project-panel ${variant} ${!hasImages ? 'text-only' : ''}`}>
         <div
           className={`project-panel-inner ${
             hasImages
-              ? isEven
+              ? isFeatured
+                ? 'asymmetric-grid-breaker'
+                : isEven
                 ? 'layout-even'
                 : 'layout-odd'
               : 'text-only-inner'
@@ -40,51 +68,68 @@ export default function ProjectPanel({
         >
           {/* Text Content Column */}
           <div className="panel-text-column">
-            <span className="panel-index">{index}</span>
+            <div className="panel-index-row timestamp-motif panel-stagger-1">
+              <span className="status-dot" aria-hidden="true" />
+              <span className="panel-index">{index}</span>
+              {timestamp && <span className="timestamp-mono">[ {timestamp} ]</span>}
+            </div>
 
-            <h3 className="panel-title">{title}</h3>
+            <h3 className="panel-title panel-stagger-2">{title}</h3>
 
             {/* Category & Role Stacked Pair */}
-            <div className="panel-meta-pair">
+            <div className="panel-meta-pair panel-stagger-3">
               <p className="panel-category">{category}</p>
               {role && <p className="panel-role">{role}</p>}
             </div>
 
-            <p className="panel-description">{description}</p>
+            <p className="panel-description panel-stagger-4">{description}</p>
 
-            {stack && <p className="panel-stack">{stack}</p>}
+            {stack && <p className="panel-stack panel-stagger-5">{stack}</p>}
 
-            {facts && <p className="panel-facts">{facts}</p>}
+            {facts && <p className="panel-facts panel-stagger-5">{facts}</p>}
 
             {/* Graceful Link / Offline State */}
-            {sourceUrl ? (
-              <a
-                href={sourceUrl}
-                className="panel-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View source →
-              </a>
-            ) : liveUrl ? (
-              <a
-                href={liveUrl}
-                className="panel-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visit site →
-              </a>
-            ) : (
-              <span className="panel-link-offline">
-                Client project — currently offline
-              </span>
-            )}
+            <div className="panel-stagger-6">
+              {sourceUrl ? (
+                <a
+                  href={sourceUrl}
+                  className="panel-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View source →
+                </a>
+              ) : liveUrl ? (
+                <a
+                  href={liveUrl}
+                  className="panel-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit site →
+                </a>
+              ) : (
+                <span className="panel-link-offline">
+                  Client project — currently offline
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Screenshot / Multi-Image Column (Only rendered for visual projects) */}
+          {/* Screenshot / Multi-Image Column */}
           {hasImages && (
-            <div className="panel-image-column">
+            <div
+              className={`panel-image-column panel-stagger-image ${
+                isFeatured ? 'asymmetric-image-column' : ''
+              }`}
+            >
+              {isFeatured && (
+                <div className="asymmetric-accent-badge">
+                  <span className="status-dot pulsing" aria-hidden="true" />
+                  <span className="asymmetric-badge-text">Featured Case Study • NCGSA</span>
+                </div>
+              )}
+
               <div className="panel-media-container">
                 <img
                   src={currentImage}

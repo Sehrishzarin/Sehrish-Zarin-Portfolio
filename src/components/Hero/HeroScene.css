@@ -1,0 +1,37 @@
+/* HeroScene 3D Wireframe / GLB Canvas Container */
+.hero-scene-container {
+  position: absolute;
+  right: clamp(1.5rem, 7vw, 6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(280px, 26vw, 400px);
+  height: clamp(280px, 26vw, 400px);
+  pointer-events: auto;
+  cursor: grab;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  touch-action: none;
+  user-select: none;
+}
+
+.hero-scene-container:active {
+  cursor: grabbing;
+}
+
+.hero-scene-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: auto;
+  cursor: inherit;
+  display: block;
+}
+
+/* Hide 3D background canvas on mobile viewports for performance & clean layout */
+@media (max-width: 768px) {
+  .hero-scene-container {
+    display: none;
+  }
+}

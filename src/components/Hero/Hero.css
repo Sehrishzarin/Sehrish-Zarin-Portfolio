@@ -67,6 +67,8 @@
   padding-top: 2rem;
   padding-bottom: 3rem;
   box-sizing: border-box;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-content {

@@ -5,7 +5,7 @@
   --bg-primary: #0a0a0a;
   --text-primary: #f5f5f0;
   --text-muted: #a3a39c;
-  --accent: #8ba888;
+  --accent: #C8963E;
   --bg-light: #f5f5f0;
   --text-on-light: #0a0a0a;
 
@@ -73,3 +73,149 @@ button:active,
 [role="button"]:active {
   transform: translateY(0) scale(0.98);
 }
+
+/* Signature Dot & Timestamp Motif */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  vertical-align: middle;
+  margin-right: 0.45rem;
+  position: relative;
+  transition: transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.status-dot.pulsing::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: dotRadarPulse 2.4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes dotRadarPulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  70%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.timestamp-motif {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 200ms ease;
+}
+
+.timestamp-motif:hover .status-dot {
+  transform: scale(1.4);
+}
+
+.timestamp-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  opacity: 0.9;
+  margin-left: 0.4rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.timestamp-mono {
+  font-family: monospace, var(--font-body);
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* Persistent Reactive Scroll Progress Indicator */
+.scroll-progress-rail {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  height: 140px;
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 300ms ease;
+}
+
+.scroll-progress-line {
+  position: relative;
+  width: 1.5px;
+  height: 100px;
+  background-color: rgba(163, 163, 156, 0.2);
+  border-radius: 1px;
+}
+
+.scroll-progress-thumb {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  transition: transform 150ms cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.scroll-progress-thumb::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.6;
+  animation: dotRadarPulse 2.5s infinite;
+}
+
+.scroll-progress-val {
+  font-family: monospace, var(--font-body);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .scroll-progress-rail {
+    right: 0.5rem;
+    height: 100px;
+  }
+  .scroll-progress-line {
+    height: 70px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-rail {
+    display: none !important;
+  }
+}
+
+

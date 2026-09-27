@@ -16,21 +16,22 @@
   grid-template-columns: 4fr 6fr; /* ~40/60 desktop split */
   gap: clamp(2.5rem, 6vw, 5rem);
   box-sizing: border-box;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.capabilities-container.reveal {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Left Column */
 .capabilities-left {
   display: flex;
   flex-direction: column;
+  will-change: transform;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 750ms cubic-bezier(0.19, 1, 0.22, 1),
+              transform 750ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.capabilities-container.reveal .capabilities-left {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .capabilities-eyebrow {
@@ -73,6 +74,31 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1),
+              transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.capabilities-container.reveal .capabilities-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.capabilities-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.item-dot {
+  background-color: var(--accent, #C8963E);
+  margin-right: 0.25rem;
+  transition: transform 200ms ease;
+}
+
+.capabilities-item:hover .item-dot {
+  transform: scale(1.5);
 }
 
 .capabilities-item-title {
@@ -81,6 +107,11 @@
   font-weight: 500;
   color: var(--text-primary, #f5f5f0);
   margin: 0;
+  transition: color 200ms ease;
+}
+
+.capabilities-item:hover .capabilities-item-title {
+  color: var(--accent, #C8963E);
 }
 
 .capabilities-item-description {
@@ -89,6 +120,7 @@
   line-height: 1.55;
   color: var(--text-muted, #a3a39c);
   margin: 0;
+  padding-left: 1.1rem;
 }
 
 /* Closing Line Text Link */
@@ -116,7 +148,7 @@
 }
 
 .capabilities-closing-link:hover {
-  color: var(--accent, #8ba888);
+  color: var(--accent, #C8963E);
 }
 
 .capabilities-closing-link:hover .capabilities-arrow {
@@ -136,5 +168,14 @@
 
   .capabilities-closing {
     margin-top: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capabilities-left,
+  .capabilities-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

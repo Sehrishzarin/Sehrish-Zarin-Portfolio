@@ -27,7 +27,7 @@
   color: var(--text-on-light, #0a0a0a);
 }
 
-/* Constrained Inner Content Container (Standard 1100px Max-Width) */
+/* Constrained Inner Content Container (Standard Max-Width) */
 .project-panel-inner {
   max-width: 1400px;
   width: 100%;
@@ -39,6 +39,7 @@
   grid-template-columns: 1fr 1.25fr; /* ~44% text, ~56% image */
   gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
+  position: relative;
 }
 
 /* Single-Column Text-Only Layout Variant */
@@ -54,20 +55,28 @@
   width: 100%;
 }
 
+/* Index & Timestamp Row */
+.panel-index-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.panel-index {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  opacity: 0.75;
+}
+
 /* Left Column: Text Content */
 .panel-text-column {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-}
-
-.panel-index {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
 }
 
 .panel-title {
@@ -98,7 +107,7 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--accent, #8ba888);
+  color: var(--accent, #e07a5f);
   margin: 0;
 }
 
@@ -126,6 +135,7 @@
   line-height: 1.45;
 }
 
+/* Single Accent CTA State for Links */
 .panel-link {
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.875rem;
@@ -134,11 +144,15 @@
   text-decoration: none;
   width: fit-content;
   margin-top: 0.5rem;
-  transition: opacity 200ms ease;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 220ms ease, color 220ms ease, transform 220ms ease;
 }
 
 .panel-link:hover {
-  text-decoration: underline;
+  color: var(--accent, #e07a5f);
+  border-bottom-color: var(--accent, #e07a5f);
+  transform: translateX(4px);
 }
 
 /* Graceful Offline State (No clickable link) */
@@ -175,6 +189,7 @@
   display: block;
   border-radius: 8px;
   filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.28));
+  transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* Multi-image thumbnails row */
@@ -196,7 +211,7 @@
 }
 
 .panel-thumbnail-btn.active {
-  border-color: var(--accent, #8ba888);
+  border-color: var(--accent, #e07a5f);
 }
 
 .panel-thumbnail-img {
@@ -207,25 +222,32 @@
   display: block;
 }
 
-/* Screenshot Placeholder */
-.panel-image-placeholder {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-  display: flex;
+/* Asymmetric Grid-Breaker Case Study Styles */
+.asymmetric-accent-badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--bg-primary, #0a0a0a);
+  color: var(--text-primary, #f5f5f0);
+  border: 1px solid var(--accent, #e07a5f);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.project-panel.light .asymmetric-accent-badge {
+  background-color: #ffffff;
+  color: #0a0a0a;
+}
+
+.asymmetric-badge-text {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.85rem;
-  opacity: 0.5;
+  letter-spacing: 0.04em;
 }
 
-.project-panel.light .panel-image-placeholder {
-  background-color: rgba(10, 10, 10, 0.05);
-}
-
-/* Desktop Horizontal Drawer Styles (min-width: 1024px) */
+/* Desktop Horizontal Drawer & Asymmetric Grid Breaker (min-width: 1024px) */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .project-panel-wrapper {
     width: 100vw;
@@ -253,6 +275,35 @@
   .project-panel-inner.layout-even .panel-image-column {
     order: 1;
   }
+
+  /* BROKEN GRID: Asymmetric Case Study Composition */
+  .project-panel-inner.asymmetric-grid-breaker {
+    grid-template-columns: 0.9fr 1.35fr;
+    gap: 4vw;
+  }
+
+  .project-panel-inner.asymmetric-grid-breaker .panel-text-column {
+    transform: translateY(-24px);
+    z-index: 3;
+  }
+
+  .project-panel-inner.asymmetric-grid-breaker .asymmetric-image-column {
+    position: relative;
+    transform: translateY(28px) rotate(-1.5deg);
+    margin-right: -5vw; /* Bleeds past normal container edge! */
+    transition: transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .project-panel-inner.asymmetric-grid-breaker .asymmetric-image-column:hover {
+    transform: translateY(12px) rotate(0deg);
+  }
+
+  .project-panel-inner.asymmetric-grid-breaker .asymmetric-accent-badge {
+    position: absolute;
+    top: -22px;
+    left: -24px;
+    z-index: 10;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -275,4 +326,86 @@
     height: auto;
     object-fit: contain;
   }
+
+  .project-panel-inner.asymmetric-grid-breaker .asymmetric-image-column {
+    margin-right: 0;
+    transform: none;
+  }
 }
+
+/* Staggered Non-Uniform Reveal Rules */
+.panel-stagger-1,
+.panel-stagger-2,
+.panel-stagger-3,
+.panel-stagger-4,
+.panel-stagger-5,
+.panel-stagger-6 {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms cubic-bezier(0.19, 1, 0.22, 1),
+              transform 700ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.panel-stagger-image {
+  opacity: 0;
+  transform: translateY(32px) scale(0.96);
+  transition: opacity 800ms cubic-bezier(0.19, 1, 0.22, 1),
+              transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.panel-visible .panel-stagger-1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+
+.panel-visible .panel-stagger-2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 90ms;
+}
+
+.panel-visible .panel-stagger-3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 170ms;
+}
+
+.panel-visible .panel-stagger-4 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 250ms;
+}
+
+.panel-visible .panel-stagger-5 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 330ms;
+}
+
+.panel-visible .panel-stagger-6 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 400ms;
+}
+
+.panel-visible .panel-stagger-image {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-stagger-1,
+  .panel-stagger-2,
+  .panel-stagger-3,
+  .panel-stagger-4,
+  .panel-stagger-5,
+  .panel-stagger-6,
+  .panel-stagger-image {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

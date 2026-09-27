@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Hero.css'
 
 export default function Hero() {
   const [localTime, setLocalTime] = useState('')
+  const heroContentRef = useRef(null)
 
   useEffect(() => {
     const updateTime = () => {
@@ -20,6 +21,35 @@ export default function Hero() {
     updateTime()
     const interval = setInterval(updateTime, 60000)
     return () => clearInterval(interval)
+  }, [])
+
+  // Continuous scroll-linked parallax for Hero content
+  useEffect(() => {
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (isReducedMotion) return
+
+    let ticking = false
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (heroContentRef.current) {
+            const scrollY = window.scrollY
+            if (scrollY <= window.innerHeight) {
+              const translateY = scrollY * 0.22
+              const opacity = Math.max(0, 1 - scrollY / (window.innerHeight * 0.85))
+              heroContentRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`
+              heroContentRef.current.style.opacity = opacity.toString()
+            }
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
@@ -58,9 +88,9 @@ export default function Hero() {
         </ul>
       </nav>
 
-      {/* Main Content Block */}
+      {/* Main Content Block with Scroll Parallax */}
       <div className="hero-body">
-        <div className="hero-content">
+        <div className="hero-content" ref={heroContentRef}>
           <p className="hero-eyebrow">
             Software Engineer / Freelancer
           </p>
@@ -82,7 +112,7 @@ export default function Hero() {
               >
                 <path
                   d="M28 6C20 4 12 8 4 14M4 14L10 12M4 14L6 18"
-                  stroke="var(--accent, #8ba888)"
+                  stroke="var(--accent, #C8963E)"
                   strokeWidth="1.75"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -97,9 +127,11 @@ export default function Hero() {
           </p>
 
           {/* Location + Live Local Time */}
-          <p className="hero-location">
-            Islamabad, Pakistan · {localTime}
-          </p>
+          <div className="hero-location timestamp-motif">
+            <span className="status-dot pulsing" aria-hidden="true" />
+            <span>Islamabad, PK · {localTime}</span>
+            <span className="timestamp-tag">• active now</span>
+          </div>
 
           {/* Quiet Contact Row + Annotation */}
           <div className="hero-contact-row">
@@ -125,7 +157,7 @@ export default function Hero() {
               >
                 <path
                   d="M30 17C22 21 12 17 6 9M6 9L12 7M6 9L8 14"
-                  stroke="var(--accent, #8ba888)"
+                  stroke="var(--accent, #C8963E)"
                   strokeWidth="1.75"
                   strokeLinecap="round"
                   strokeLinejoin="round"

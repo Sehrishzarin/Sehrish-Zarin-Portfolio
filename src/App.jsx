@@ -1,5 +1,6 @@
 import React from 'react'
 import CustomCursor from './components/CustomCursor/CustomCursor'
+import ScrollProgress from './components/ScrollProgress/ScrollProgress'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
 import WorkSection from './components/Work/WorkSection'
@@ -11,6 +12,7 @@ function App() {
   return (
     <main className="portfolio-app">
       <CustomCursor />
+      <ScrollProgress />
       <Hero />
       <About />
       <WorkSection />

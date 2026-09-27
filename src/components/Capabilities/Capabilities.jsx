@@ -31,13 +31,13 @@ const capabilitiesData = [
 export default function Capabilities() {
   const [isRevealed, setIsRevealed] = useState(false)
   const sectionRef = useRef(null)
+  const introRef = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsRevealed(true)
-          observer.disconnect()
         }
       },
       { threshold: 0.15 }
@@ -50,30 +50,63 @@ export default function Capabilities() {
     return () => observer.disconnect()
   }, [])
 
+  // Continuous scroll-linked parallax motion (disabled for reduced motion)
+  useEffect(() => {
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (isReducedMotion) return
+
+    let ticking = false
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (sectionRef.current && introRef.current) {
+            const rect = sectionRef.current.getBoundingClientRect()
+            const viewHeight = window.innerHeight
+            const progress = (rect.top - viewHeight / 2) / viewHeight
+            const translateY = Math.min(25, Math.max(-25, progress * -35))
+            introRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section id="capabilities" className="capabilities-section">
-      <div
-        ref={sectionRef}
-        className={`capabilities-container ${isRevealed ? 'reveal' : ''}`}
-      >
-        {/* Left Column: Eyebrow + Intro Sentence (~40% width) */}
-        <div className="capabilities-left">
-          <p className="capabilities-eyebrow">Capabilities</p>
+    <section id="capabilities" className="capabilities-section" ref={sectionRef}>
+      <div className={`capabilities-container ${isRevealed ? 'reveal' : ''}`}>
+        {/* Left Column: Eyebrow + Intro Sentence with Continuous Parallax */}
+        <div className="capabilities-left" ref={introRef}>
+          <p className="capabilities-eyebrow timestamp-motif">
+            <span className="status-dot" aria-hidden="true" />
+            <span>Capabilities</span>
+            <span className="timestamp-mono">[ skills • 2026 ]</span>
+          </p>
           <h2 className="capabilities-intro">
             Here&apos;s where I&apos;m most useful, whether you&apos;re hiring or building something together.
           </h2>
         </div>
 
-        {/* Right Column: List of items + Closing link (~60% width) */}
+        {/* Right Column: List of items + Closing link */}
         <div className="capabilities-right">
           <ul className="capabilities-list">
             {capabilitiesData.map((item, idx) => (
               <li
                 key={item.id}
                 className="capabilities-item"
-                style={{ transitionDelay: `${idx * 60 + 100}ms` }}
+                style={{ transitionDelay: `${idx * 80 + 120}ms` }}
               >
-                <h3 className="capabilities-item-title">{item.title}</h3>
+                <div className="capabilities-item-header">
+                  <span className="status-dot item-dot" aria-hidden="true" />
+                  <h3 className="capabilities-item-title">{item.title}</h3>
+                </div>
                 <p className="capabilities-item-description">
                   {item.description}
                 </p>

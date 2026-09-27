@@ -10,7 +10,6 @@ export default function Contact() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsRevealed(true)
-          observer.disconnect()
         }
       },
       { threshold: 0.15 }
@@ -31,46 +30,71 @@ export default function Contact() {
         ref={sectionRef}
         className={`contact-container ${isRevealed ? 'reveal' : ''}`}
       >
-        {/* Eyebrow */}
-        <p className="contact-eyebrow">Contact</p>
+        <div className="contact-grid">
+          {/* Left Column: Availability CTA Statement + Reintroduced Status Marker */}
+          <div className="contact-left">
+            <p className="contact-eyebrow timestamp-motif">
+              <span className="status-dot" aria-hidden="true" />
+              <span>Contact</span>
+              <span className="timestamp-mono">[ 07 • LET'S TALK ]</span>
+            </p>
 
-        {/* Statement Line */}
-        <h2 className="contact-statement">
-          Open to freelance work and full-time roles. Reach out.
-        </h2>
+            <h2 className="contact-statement">
+              Open to freelance projects & full-time engineering roles. Let&apos;s build something real together.
+            </h2>
 
-        {/* Plain Text Links */}
-        <div className="contact-links">
-          <a
-            href="mailto:zarinsehrish@gmail.com"
-            className="contact-link"
-          >
-            zarinsehrish@gmail.com
-          </a>
+            {/* Reintroduced Status Marker Closing Hero Beat */}
+            <div className="contact-status-row">
+              <span className="status-dot pulsing" aria-hidden="true" />
+              <span className="contact-status-text">Actively replying within a day</span>
+            </div>
+          </div>
 
-          <a
-            href="https://www.linkedin.com/in/sehrish-zarin/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            linkedin.com/in/sehrish-zarin
-          </a>
+          {/* Right Column: Interactive Contact Links with Ochre Dots & Hover Animations */}
+          <div className="contact-right">
+            <span className="contact-list-label">Direct Channels</span>
 
-          <a
-            href="https://github.com/sehrishzarin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            github.com/sehrishzarin
-          </a>
+            <div className="contact-links-list">
+              <a
+                href="mailto:zarinsehrish@gmail.com"
+                className="contact-link-item"
+              >
+                <span className="status-dot link-dot" aria-hidden="true" />
+                <span className="contact-link-text">zarinsehrish@gmail.com</span>
+                <span className="contact-link-arrow">→</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/sehrish-zarin/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link-item"
+              >
+                <span className="status-dot link-dot" aria-hidden="true" />
+                <span className="contact-link-text">linkedin.com/in/sehrish-zarin</span>
+                <span className="contact-link-arrow">↗</span>
+              </a>
+
+              <a
+                href="https://github.com/sehrishzarin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link-item"
+              >
+                <span className="status-dot link-dot" aria-hidden="true" />
+                <span className="contact-link-text">github.com/sehrishzarin</span>
+                <span className="contact-link-arrow">↗</span>
+              </a>
+            </div>
+
+            {/* Dynamic Closing Line */}
+            <div className="contact-closing-line timestamp-motif">
+              <span className="status-dot pulsing" aria-hidden="true" />
+              <span>Sehrish Zarin, {currentYear}, Islamabad</span>
+              <span className="timestamp-tag">• online & available</span>
+            </div>
+          </div>
         </div>
-
-        {/* Dynamic Closing Line */}
-        <p className="contact-closing">
-          Sehrish Zarin, {currentYear}, Islamabad.
-        </p>
       </div>
     </section>
   )
