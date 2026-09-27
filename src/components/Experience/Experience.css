@@ -8,10 +8,10 @@
 }
 
 .experience-container {
-  max-width: var(--content-max-width, 1100px);
+  max-width: var(--content-max-width, 1320px);
   margin: 0 auto;
-  padding-left: var(--content-padding-h, clamp(1.5rem, 5vw, 6rem));
-  padding-right: var(--content-padding-h, clamp(1.5rem, 5vw, 6rem));
+  padding-left: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
+  padding-right: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
   box-sizing: border-box;
 }
 

@@ -90,14 +90,14 @@ export default function ProjectPanel({
 
             {/* Graceful Link / Offline State */}
             <div className="panel-stagger-6">
-              {sourceUrl ? (
+              {sourceUrl && sourceUrl !== '#' ? (
                 <a
                   href={sourceUrl}
                   className="panel-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View source →
+                  Visit project →
                 </a>
               ) : liveUrl ? (
                 <a
@@ -133,7 +133,9 @@ export default function ProjectPanel({
               <div className="panel-media-container">
                 <img
                   src={currentImage}
-                  alt={`${title} preview ${activeImageIndex + 1}`}
+                  alt={`${title} — ${category} interface preview`}
+                  loading="lazy"
+                  decoding="async"
                   className="panel-image"
                 />
 
@@ -152,7 +154,9 @@ export default function ProjectPanel({
                       >
                         <img
                           src={img}
-                          alt=""
+                          alt={`${title} thumbnail ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
                           className="panel-thumbnail-img"
                         />
                       </button>

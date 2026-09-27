@@ -29,11 +29,11 @@
 
 /* Constrained Inner Content Container (Standard Max-Width) */
 .project-panel-inner {
-  max-width: 1400px;
+  max-width: var(--content-max-width, 1320px);
   width: 100%;
   margin: 0 auto;
-  padding-left: clamp(1.5rem, 4vw, 4rem);
-  padding-right: clamp(1.5rem, 4vw, 4rem);
+  padding-left: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
+  padding-right: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 1.25fr; /* ~44% text, ~56% image */
@@ -46,7 +46,7 @@
 .project-panel-inner.text-only-inner {
   display: flex;
   flex-direction: column;
-  max-width: 1400px;
+  max-width: var(--content-max-width, 1320px);
   width: 100%;
 }
 

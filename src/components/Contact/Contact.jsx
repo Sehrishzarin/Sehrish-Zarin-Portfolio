@@ -33,11 +33,11 @@ export default function Contact() {
         <div className="contact-grid">
           {/* Left Column: Availability CTA Statement + Reintroduced Status Marker */}
           <div className="contact-left">
-            <p className="contact-eyebrow timestamp-motif">
+            <h2 className="contact-eyebrow timestamp-motif">
               <span className="status-dot" aria-hidden="true" />
               <span>Contact</span>
               <span className="timestamp-mono">[ 07 • LET'S TALK ]</span>
-            </p>
+            </h2>
 
             <h2 className="contact-statement">
               Open to freelance projects & full-time engineering roles. Let&apos;s build something real together.

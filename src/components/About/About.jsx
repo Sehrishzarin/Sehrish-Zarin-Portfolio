@@ -58,11 +58,11 @@ export default function About() {
         <div className="about-grid">
           {/* Left Column: Eyebrow + Statement + Standalone Quote + Work Link */}
           <div className="about-left">
-            <p className="about-eyebrow timestamp-motif">
+            <h2 className="about-eyebrow timestamp-motif">
               <span className="status-dot" aria-hidden="true" />
               <span>About</span>
               <span className="timestamp-mono">[ bio • 2026 ]</span>
-            </p>
+            </h2>
 
             <p className="about-statement">
               I'm a software engineer and product builder based in Islamabad, working
@@ -74,10 +74,9 @@ export default function About() {
 
             {/* Standalone Display Quote in Ochre Accent */}
             <div className="about-quote-container">
-              <span className="about-quote-mark" aria-hidden="true">“</span>
-              <h3 className="about-display-quote">
-                Most of what I build starts as a real problem someone on a team was stuck on.
-              </h3>
+              <blockquote className="about-display-quote">
+                “Most of what I build starts as a real problem someone on a team was stuck on.”
+              </blockquote>
             </div>
 
             {/* Subtitle Closing Link to Work Section */}

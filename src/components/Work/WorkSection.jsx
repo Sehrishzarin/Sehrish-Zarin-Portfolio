@@ -17,7 +17,8 @@ const panelsData = [
     stack: 'React · Python · NASA JPL Horizons API · Skyfield',
     facts:
       'Live visibility forecasting · Python weather microservice · Adopted for active institute use',
-    sourceUrl: '#',
+    liveUrl: 'https://planatarium-managment-system-two.vercel.app/',
+    sourceUrl: 'https://planatarium-managment-system-two.vercel.app/',
     imageSrc: '/planetarium-mockup.jpg'
   },
   {
@@ -33,7 +34,8 @@ const panelsData = [
     stack: 'React · MongoDB · Ant Design',
     facts:
       'Zero fixed templates · Custom form builder · Centralized registration control',
-    sourceUrl: '#',
+    liveUrl: 'https://event-management-system-cyan-eta.vercel.app/',
+    sourceUrl: 'https://event-management-system-cyan-eta.vercel.app/',
     imageSrc: '/ems-mockup-dark.jpg'
   },
   {
@@ -92,7 +94,8 @@ const panelsData = [
     stack: 'React · Capacitor',
     facts:
       'Android via Capacitor · Plain-language symptom triage · Specialty matching',
-    sourceUrl: '#',
+    liveUrl: 'https://mediguide-git-main-sehrishzarins-projects.vercel.app/',
+    sourceUrl: 'https://mediguide-git-main-sehrishzarins-projects.vercel.app/',
     imageSrc: '/mediguide-mockup.jpg'
   }
 ]
@@ -166,11 +169,11 @@ export default function WorkSection() {
     <section id="work" className="work-section">
       <div className="work-container">
         {/* Eyebrow label sitting above section with Timestamp Motif */}
-        <p className="work-eyebrow timestamp-motif">
+        <h2 className="work-eyebrow timestamp-motif">
           <span className="status-dot" aria-hidden="true" />
           <span>Work</span>
-          <span className="timestamp-mono">[ 01–06 • 2024–2026 ]</span>
-        </p>
+          <span className="timestamp-mono">[ 01–06 • PROJECTS ]</span>
+        </h2>
       </div>
 
       {/* Desktop Pinned Horizontal Drawer / Mobile Stack Outer Wrapper */}

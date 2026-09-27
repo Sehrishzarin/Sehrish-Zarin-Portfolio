@@ -13,14 +13,17 @@
 
 /* Minimal Top Navigation Bar */
 .hero-nav {
+  max-width: var(--content-max-width, 1320px);
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: clamp(1.5rem, 4vh, 2.5rem);
   padding-bottom: 1.5rem;
-  padding-left: clamp(1.5rem, 9vw, 8rem);
-  padding-right: clamp(1.5rem, 9vw, 8rem);
+  padding-left: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
+  padding-right: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
   background: transparent;
   z-index: 10;
   box-sizing: border-box;
@@ -60,10 +63,14 @@
 /* Main Hero Content Block */
 .hero-body {
   flex: 1;
+  max-width: var(--content-max-width, 1320px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding-left: clamp(1.5rem, 9vw, 8rem);
-  padding-right: clamp(1.5rem, 9vw, 8rem);
+  padding-left: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
+  padding-right: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
   padding-top: 2rem;
   padding-bottom: 3rem;
   box-sizing: border-box;
@@ -259,7 +266,12 @@
 
 /* Group 7: Subtle Scroll Down Indicator */
 .hero-scroll-indicator {
-  padding-left: clamp(1.5rem, 9vw, 8rem);
+  max-width: var(--content-max-width, 1320px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding-left: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
+  padding-right: var(--content-padding-h, clamp(1.5rem, 5vw, 4rem));
   padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
   display: flex;
   align-items: center;

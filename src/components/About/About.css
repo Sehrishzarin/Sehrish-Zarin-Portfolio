@@ -74,20 +74,9 @@
 
 /* Standalone Display Line in Ochre Accent (#C8963E) */
 .about-quote-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(200, 150, 62, 0.25);
   margin-top: 0.25rem;
-}
-
-.about-quote-mark {
-  font-family: var(--font-headline, "Fraunces", serif);
-  font-size: 3rem;
-  line-height: 0.8;
-  color: var(--accent, #C8963E);
-  opacity: 0.7;
 }
 
 .about-display-quote {

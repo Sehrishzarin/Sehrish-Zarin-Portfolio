@@ -64,7 +64,7 @@ export default function Capabilities() {
             const rect = sectionRef.current.getBoundingClientRect()
             const viewHeight = window.innerHeight
             const progress = (rect.top - viewHeight / 2) / viewHeight
-            const translateY = Math.min(25, Math.max(-25, progress * -35))
+            const translateY = Math.min(20, Math.max(-20, progress * -30))
             introRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`
           }
           ticking = false
@@ -82,19 +82,44 @@ export default function Capabilities() {
   return (
     <section id="capabilities" className="capabilities-section" ref={sectionRef}>
       <div className={`capabilities-container ${isRevealed ? 'reveal' : ''}`}>
-        {/* Left Column: Eyebrow + Intro Sentence with Continuous Parallax */}
+        {/* Left Column: Eyebrow + Intro Headline + Secondary "Also offering" block */}
         <div className="capabilities-left" ref={introRef}>
-          <p className="capabilities-eyebrow timestamp-motif">
+          <h2 className="capabilities-eyebrow timestamp-motif">
             <span className="status-dot" aria-hidden="true" />
             <span>Capabilities</span>
             <span className="timestamp-mono">[ skills • 2026 ]</span>
-          </p>
+          </h2>
+          
           <h2 className="capabilities-intro">
             Here&apos;s where I&apos;m most useful, whether you&apos;re hiring or building something together.
           </h2>
+
+          {/* Secondary "Also offering" block in left column */}
+          <div className="capabilities-additional-block">
+            <div className="capabilities-additional-label timestamp-motif">
+              <span className="status-dot" aria-hidden="true" />
+              <span>Also offering</span>
+            </div>
+
+            <ul className="capabilities-additional-list">
+              <li className="capabilities-additional-item">
+                <h3 className="capabilities-additional-title">UI/UX Design</h3>
+                <p className="capabilities-additional-description">
+                  Designing interfaces people don&apos;t have to think about, from wireframes through to polished screens.
+                </p>
+              </li>
+
+              <li className="capabilities-additional-item">
+                <h3 className="capabilities-additional-title">Business & Data Analysis</h3>
+                <p className="capabilities-additional-description">
+                  Turning raw numbers into decisions: market research, metrics, and reporting that actually get used.
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {/* Right Column: List of items + Closing link */}
+        {/* Right Column: Primary 4 Capabilities + Ochre CTA link */}
         <div className="capabilities-right">
           <ul className="capabilities-list">
             {capabilitiesData.map((item, idx) => (
@@ -114,10 +139,10 @@ export default function Capabilities() {
             ))}
           </ul>
 
-          {/* Closing Line Text Link */}
+          {/* Ochre CTA Link with Draw-In Hover Underline */}
           <div className="capabilities-closing">
             <a href="#contact" className="capabilities-closing-link">
-              Available for freelance projects and full-time roles.{' '}
+              <span>Available for freelance projects and full-time roles</span>
               <span className="capabilities-arrow">→</span>
             </a>
           </div>

@@ -11,11 +11,11 @@ export default function ExperienceSection() {
       <div className="experience-container">
         {/* Header Row: Eyebrow + View Toggle */}
         <div className="experience-header-row">
-          <p className="experience-eyebrow timestamp-motif">
+          <h2 className="experience-eyebrow timestamp-motif">
             <span className="status-dot" aria-hidden="true" />
             <span>Experience</span>
             <span className="timestamp-mono">[ 2023–present ]</span>
-          </p>
+          </h2>
 
           <div className="experience-header-controls">
             {/* Annotation note pointing right towards Timeline option */}
