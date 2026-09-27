@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sehrishzarin.com/sitemap.xml
+Sitemap: https://sehrishzarin.xyz/sitemap.xml
